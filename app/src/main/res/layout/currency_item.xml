@@ -8,6 +8,7 @@
     android:layout_marginVertical="5dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_currencyItem"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         app:cardBackgroundColor="@color/white"
