@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class RawItem(
     @SerializedName("RAW")
-    val currencyitem: CurrencyItem?
+    val currencyItem: CurrencyItem?
 )
