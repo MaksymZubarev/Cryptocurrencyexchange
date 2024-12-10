@@ -12,7 +12,7 @@ import com.example.cryptocurrencyexchange.domain.items.CurrencyItem
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-abstract class RepositoryDatabase @Inject constructor(@ApplicationContext context: Context) : Repository {
+class RepositoryDatabase @Inject constructor(@ApplicationContext context: Context) : Repository {
 
     private val dao = CryptocurrencyItemsRoomDatabase.getDatabase(context).wordDao()
 
@@ -31,6 +31,10 @@ abstract class RepositoryDatabase @Inject constructor(@ApplicationContext contex
 
     override suspend fun getItem(currencyName: String): CurrencyItem {
         return dao.getItem(currencyName).toCryptocurrencyItem()
+    }
+
+    override suspend fun fetchData() {
+        TODO("Not yet implemented")
     }
 
 }

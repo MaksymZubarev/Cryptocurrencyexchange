@@ -15,7 +15,12 @@ class RepositoryImpl @Inject constructor() : Repository {
     val rawList: LiveData<List<RawItem>> get() = _rawList
 
     private val items = sortedSetOf<CurrencyItem>({item1: CurrencyItem, item2:CurrencyItem ->
-        item1.lastUpdate!! - item2.lastUpdate!!
+        (item1.currencyName!!.get(0).hashCode()-65)*26*26 +
+                (item1.currencyName!!.get(1).hashCode()-65)*26 +
+                (item1.currencyName!!.get(2).hashCode()-65) -
+                (item2.currencyName!!.get(0).hashCode()-65)*26*26 -
+                (item2.currencyName!!.get(1).hashCode()-65)*26 -
+                (item2.currencyName!!.get(2).hashCode()-65)
     })
 
     private val _itemsLiveData = MutableLiveData<List<CurrencyItem>>()
