@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptocurrencyexchange.databinding.ActivityMainBinding
-import com.example.cryptocurrencyexchange.domain.CurrencyItem
+import com.example.cryptocurrencyexchange.domain.items.CurrencyItem
 import dagger.hilt.android.AndroidEntryPoint
 
 

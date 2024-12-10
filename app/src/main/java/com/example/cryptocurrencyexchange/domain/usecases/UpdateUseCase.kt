@@ -8,6 +8,6 @@ class UpdateUseCase @Inject constructor(
     private val repository: Repository
 ) {
     suspend operator fun invoke() {
-        repository.Update()
+        repository.fetchData()
     }
 }

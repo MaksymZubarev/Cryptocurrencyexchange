@@ -9,7 +9,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptocurrencyexchange.R
-import com.example.cryptocurrencyexchange.domain.CurrencyItem
+import com.example.cryptocurrencyexchange.domain.items.CurrencyItem
 
 
 class CryptoCurrencyAdapter() :
@@ -28,6 +28,7 @@ class CryptoCurrencyAdapter() :
         val name = view.findViewById<TextView>(R.id.currencyName)
         val price = view.findViewById<TextView>(R.id.currencyRate)
         val lastUpdate = view.findViewById<TextView>(R.id.currencyUpdate)
+//        val image = view.findViewById<TextView>(R.id.imageView)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): CryptoViewHolder {
@@ -40,7 +41,10 @@ class CryptoCurrencyAdapter() :
         val currencyItem = getItem(position)
         viewHolder.name.text = currencyItem.currencyName
         viewHolder.price.text = currencyItem.price.toString()
-        viewHolder.lastUpdate.text = currencyItem.lastUpdate
+        viewHolder.lastUpdate.text = currencyItem.lastUpdate.toString()
+
+//        viewHolder.lastUpdate.value = "https://www.cryptocompare.com" + currencyItem.imageURL
+
         viewHolder.cardView.setOnClickListener {
             itemsInteractionListener?.onClick(currencyItem)
         }

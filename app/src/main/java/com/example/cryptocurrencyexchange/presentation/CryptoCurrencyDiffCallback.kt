@@ -1,7 +1,7 @@
 package com.example.cryptocurrencyexchange.presentation
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.cryptocurrencyexchange.domain.CurrencyItem
+import com.example.cryptocurrencyexchange.domain.items.CurrencyItem
 
 class CryptoCurrencyDiffCallback : DiffUtil.ItemCallback<CurrencyItem>() {
     override fun areItemsTheSame(oldItem: CurrencyItem, newItem: CurrencyItem): Boolean {

@@ -30,10 +30,10 @@ class CurrencyItemActivity : AppCompatActivity(){
             with(binding) {
                 cryptoCurrency.setText(it.currencyName)
                 rateValue.setText(it.price.toString())
-                minRateValue.setText(it.min24hour.toString())
-                maxRateValue.setText(it.max24hour.toString())
-                lastDealValue.setText(it.lastDeal)
-                updateValue.setText(it.lastUpdate)
+                maxRateValue.setText(it.highday.toString())
+                minRateValue.setText(it.lowday.toString())
+                lastDealValue.setText(it.lastMarket)
+                updateValue.setText(it.lastUpdate.toString())
            }
         }
     }

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cryptocurrencyexchange.domain.CurrencyItem
+import com.example.cryptocurrencyexchange.domain.items.CurrencyItem
 import com.example.cryptocurrencyexchange.domain.usecases.GetItemUseCase
 import com.example.cryptocurrencyexchange.domain.usecases.UpdateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

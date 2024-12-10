@@ -2,7 +2,7 @@ package com.example.cryptocurrencyexchange.domain.usecases
 
 import androidx.lifecycle.LiveData
 import com.example.cryptocurrencyexchange.domain.Repository
-import com.example.cryptocurrencyexchange.domain.CurrencyItem
+import com.example.cryptocurrencyexchange.domain.items.CurrencyItem
 import javax.inject.Inject
 
 class GetItemsUseCase @Inject constructor(
