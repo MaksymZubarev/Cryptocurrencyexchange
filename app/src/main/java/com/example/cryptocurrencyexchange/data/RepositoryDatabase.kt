@@ -24,8 +24,6 @@ class RepositoryDatabase @Inject constructor(@ApplicationContext context: Contex
 
     private val dao = CryptocurrencyItemsRoomDatabase.getDatabase(context).wordDao()
 
-    private val cryptoCurrencyRetrofit = CryptoCurrencyRetrofit()
-
     override val itemsLiveData: LiveData<List<CurrencyItem>>
         get() {
             val entityLiveData: LiveData<List<CryptocurrencyEntity>> = dao.itemsLiveData()
@@ -46,6 +44,8 @@ class RepositoryDatabase @Inject constructor(@ApplicationContext context: Contex
     override suspend fun fetchData() {
 
         Log.d("YYYY", "proceeding")
+
+        val cryptoCurrencyRetrofit = CryptoCurrencyRetrofit()
 
         val currencyList = mutableListOf<CryptocurrencyEntity>()
 

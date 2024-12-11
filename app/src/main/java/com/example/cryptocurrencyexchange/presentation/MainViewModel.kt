@@ -22,6 +22,5 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             updateUseCase()
         }
-        Log.d("RRRR", "${itemsLiveData.value}")
     }
 }
