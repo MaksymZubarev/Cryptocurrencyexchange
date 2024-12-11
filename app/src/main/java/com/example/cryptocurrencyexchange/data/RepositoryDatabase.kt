@@ -51,7 +51,7 @@ class RepositoryDatabase @Inject constructor(@ApplicationContext context: Contex
 
         val response = suspendCoroutine<DataToRaw?> { continuation ->
             cryptoCurrencyRetrofit.getCryptocurrencyData { result ->
-            continuation.resume(result) } }
+                continuation.resume(result) } }
 
         if (response != null) {
             val filteredData = response.data?.filterNotNull() ?: emptyList()

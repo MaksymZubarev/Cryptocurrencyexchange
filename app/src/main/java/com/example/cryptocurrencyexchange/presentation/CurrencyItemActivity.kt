@@ -1,40 +1,37 @@
 package com.example.cryptocurrencyexchange.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.cryptocurrencyexchange.R
 import com.example.cryptocurrencyexchange.databinding.CurrencyItemFullBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class CurrencyItemActivity : AppCompatActivity(){
+class CurrencyItemActivity : AppCompatActivity() {
 
-    private val TAG: String = "XXXX"
-    private val binding by lazy {
-            CurrencyItemFullBinding.inflate(layoutInflater)
-        }
-
-    private val viewModel by viewModels<CurrencyItemViewModel>()
+    lateinit var binding: CurrencyItemFullBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        binding = CurrencyItemFullBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Log.d("XXX", binding.root.toString())
 
-        setupLiveData()
+        val cryptoCurrencyItemName = intent.getStringExtra(CRYPTOITEMNAME)
+        if (cryptoCurrencyItemName != null) {
+            if (savedInstanceState == null) {
+                setupFragment(CryptoCurrencyFragment.newInstance(cryptoCurrencyItemName))
+            }
+        }
     }
 
-    private fun setupLiveData() {
-        viewModel.itemLiveData.observe(this) {
-            with(binding) {
-                cryptoCurrency.setText(it.currencyName)
-                rateValue.setText(it.price.toString())
-                maxRateValue.setText(it.highday.toString())
-                minRateValue.setText(it.lowday.toString())
-                lastDealValue.setText(it.lastMarket)
-                updateValue.setText(it.lastUpdate.toString())
-           }
-        }
+    private fun setupFragment(fragment: CryptoCurrencyFragment){
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.currency_item_container, fragment)
+            .commit()
     }
 }

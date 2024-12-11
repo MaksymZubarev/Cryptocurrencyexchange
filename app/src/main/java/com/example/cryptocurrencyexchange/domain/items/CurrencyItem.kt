@@ -18,11 +18,3 @@ data class CurrencyItem(
     @SerializedName("IMAGEURL")
     val imageURL: String? = null
 )
-
-//"BTC"
-//"CCCAGG"
-//97511.6689743797
-//1733824702
-//98177.5815167446
-//95625.0885867649
-//"/media/37746251/btc.png"
