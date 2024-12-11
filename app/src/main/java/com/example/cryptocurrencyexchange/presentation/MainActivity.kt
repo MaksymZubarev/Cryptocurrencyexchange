@@ -81,6 +81,7 @@ class MainActivity : AppCompatActivity() {
             .addToBackStack(null)
             .replace(R.id.currency_item_container, fragment)
             .commit()
+
     }
 
 }
