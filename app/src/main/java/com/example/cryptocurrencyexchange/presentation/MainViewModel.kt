@@ -1,6 +1,5 @@
 package com.example.cryptocurrencyexchange.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cryptocurrencyexchange.domain.usecases.GetItemsUseCase
