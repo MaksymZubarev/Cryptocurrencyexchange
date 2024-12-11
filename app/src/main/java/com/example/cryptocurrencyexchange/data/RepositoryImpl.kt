@@ -1,8 +1,10 @@
 package com.example.cryptocurrencyexchange.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.cryptocurrencyexchange.domain.Repository
+import com.example.cryptocurrencyexchange.domain.items.BeforeRaw
 import com.example.cryptocurrencyexchange.domain.items.RawItem
 import com.example.cryptocurrencyexchange.domain.items.CurrencyItem
 import javax.inject.Inject
@@ -10,9 +12,6 @@ import javax.inject.Inject
 class RepositoryImpl @Inject constructor() : Repository {
 
     private val cryptoCurrencyRetrofit = CryptoCurrencyRetrofit()
-
-    private val _rawList = MutableLiveData<List<RawItem>>()
-    val rawList: LiveData<List<RawItem>> get() = _rawList
 
     private val items = sortedSetOf<CurrencyItem>({item1: CurrencyItem, item2:CurrencyItem ->
         (item1.currencyName!!.get(0).hashCode()-65)*26*26 +
@@ -38,26 +37,28 @@ class RepositoryImpl @Inject constructor() : Repository {
     }
 
     override suspend fun fetchData() {
-        for (i in items) {
-            val itemToRemove = items.find {
-                it.currencyName == i.currencyName
-            }
-            items.remove(itemToRemove)
-        }
 
-        cryptoCurrencyRetrofit.getCryptocurrencyData() { response ->
+        items.clear()
+
+        cryptoCurrencyRetrofit.getCryptocurrencyData { response ->
             if (response != null) {
-                _rawList.postValue(response.data?.filterNotNull() ?: emptyList())
+                val filteredData = response.data?.filterNotNull() ?: emptyList()
+
+                Log.d("XXXX", "$filteredData")
+
+                for (i in filteredData) {
+                    if (i.rawData?.currencyItem!=null)
+                        items.add(i.rawData?.currencyItem!!)
+                }
+                Log.d("XXXX", "$items")
+
+                update()
             } else {
-                _rawList.postValue(emptyList())
+                Log.d("XXXX", "Failure")
+
+                update()
             }
         }
-
-        for (i in rawList.value!!) {
-            items.add(i.currencyItem!!)
-        }
-
-        update()
     }
 }
 

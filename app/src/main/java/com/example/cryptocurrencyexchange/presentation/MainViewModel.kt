@@ -1,5 +1,6 @@
 package com.example.cryptocurrencyexchange.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cryptocurrencyexchange.domain.usecases.GetItemsUseCase
@@ -11,7 +12,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getItemsUseCase: GetItemsUseCase,
-    private val updateUseCase: UpdateUseCase,
+    private val updateUseCase: UpdateUseCase
 ) : ViewModel() {
 
     val itemsLiveData
@@ -21,5 +22,6 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             updateUseCase()
         }
+        Log.d("RRRR", "${itemsLiveData.value}")
     }
 }

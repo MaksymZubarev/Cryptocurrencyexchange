@@ -1,6 +1,7 @@
 package com.example.cryptocurrencyexchange.data
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,19 +10,21 @@ import com.example.cryptocurrencyexchange.data.db.CryptocurrencyItemsRoomDatabas
 import com.example.cryptocurrencyexchange.data.db.entitiesToItems
 import com.example.cryptocurrencyexchange.data.db.toCryptocurrencyEntity
 import com.example.cryptocurrencyexchange.domain.Repository
+import com.example.cryptocurrencyexchange.domain.items.BeforeRaw
 import com.example.cryptocurrencyexchange.domain.items.CurrencyItem
+import com.example.cryptocurrencyexchange.domain.items.DataToRaw
 import com.example.cryptocurrencyexchange.domain.items.RawItem
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.delay
 import javax.inject.Inject
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 class RepositoryDatabase @Inject constructor(@ApplicationContext context: Context) : Repository {
 
     private val dao = CryptocurrencyItemsRoomDatabase.getDatabase(context).wordDao()
 
     private val cryptoCurrencyRetrofit = CryptoCurrencyRetrofit()
-
-    private val _rawList = MutableLiveData<List<RawItem>>()
-    val rawList: LiveData<List<RawItem>> get() = _rawList
 
     override val itemsLiveData: LiveData<List<CurrencyItem>>
         get() {
@@ -41,18 +44,33 @@ class RepositoryDatabase @Inject constructor(@ApplicationContext context: Contex
     }
 
     override suspend fun fetchData() {
-        dao.deleteAll()
-        cryptoCurrencyRetrofit.getCryptocurrencyData() { response ->
-            if (response != null) {
-                _rawList.postValue(response.data?.filterNotNull() ?: emptyList())
-            } else {
-                _rawList.postValue(emptyList())
-            }
-        }
+
+        Log.d("YYYY", "proceeding")
+
         val currencyList = mutableListOf<CryptocurrencyEntity>()
-        for (i in rawList.value!!) {
-            currencyList.add(i.currencyItem!!.toCryptocurrencyEntity())
+
+        val response = suspendCoroutine<DataToRaw?> { continuation ->
+            cryptoCurrencyRetrofit.getCryptocurrencyData { result ->
+            continuation.resume(result) } }
+
+        if (response != null) {
+            val filteredData = response.data?.filterNotNull() ?: emptyList()
+
+            Log.d("YYYY", "$filteredData")
+
+            for (i in filteredData) {
+                if (i.rawData?.currencyItem!=null)
+                    currencyList.add(i.rawData!!.currencyItem!!.toCryptocurrencyEntity())
+            }
+            Log.d("YYYY", "$currencyList")
+        } else {
+            Log.d("YYYY", "Failure")
         }
+
+        Log.d("YYYY", "$currencyList")
+
+        dao.deleteAll()
+
         dao.addAll(currencyList)
     }
 

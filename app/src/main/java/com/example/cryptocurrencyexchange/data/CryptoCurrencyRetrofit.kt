@@ -23,7 +23,7 @@ class CryptoCurrencyRetrofit {
 
     fun getCryptocurrencyData(resultCallback: (DataToRaw?) -> Unit) {
 
-        val call = service.getCurrencyExchange()
+        val call = service.getCurrencyExchange("30", "USD")
 
         call?.enqueue(object : Callback<DataToRaw> {
             override fun onResponse(

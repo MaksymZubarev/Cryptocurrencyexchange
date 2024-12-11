@@ -4,19 +4,19 @@ import com.google.gson.annotations.SerializedName
 
 data class CurrencyItem(
     @SerializedName("FROMSYMBOL")
-    val currencyName: String?,
+    val currencyName: String? = null,
     @SerializedName("LASTMARKET")
-    val lastMarket: String?,
+    val lastMarket: String? = null,
     @SerializedName("PRICE")
-    val price: Double?,
+    val price: Double? = null,
     @SerializedName("LASTUPDATE")
-    val lastUpdate: Int?,
+    val lastUpdate: Int? = null,
     @SerializedName("HIGHDAY")
-    val highday: Double?,
+    val highday: Double? = null,
     @SerializedName("LOWHDAY")
-    val lowday: Double?,
+    val lowday: Double? = null,
     @SerializedName("IMAGEURL")
-    val imageURL: String?
+    val imageURL: String? = null
 )
 
 //"BTC"

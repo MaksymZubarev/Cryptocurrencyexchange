@@ -13,8 +13,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private val TAG = "XXXX"
 
+    private val TAG = "XXXX"
 
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
@@ -35,8 +35,6 @@ class MainActivity : AppCompatActivity() {
             cryptoCurrencyAdapter.submitList(it)
         }
 
-
-
         binding.recyclerCurrency.layoutManager = LinearLayoutManager(this)
         binding.recyclerCurrency.adapter = cryptoCurrencyAdapter
 
@@ -46,6 +44,10 @@ class MainActivity : AppCompatActivity() {
 
                 showInfoAboutItem(currencyItem)
             }
+        }
+
+        binding.btnFetch.setOnClickListener {
+            viewModel.updateInfo()
         }
     }
 

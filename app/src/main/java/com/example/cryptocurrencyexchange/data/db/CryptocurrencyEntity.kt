@@ -8,7 +8,7 @@ import com.example.cryptocurrencyexchange.domain.items.CurrencyItem
 @Entity(tableName = "cryptocurrency_item_table")
 data class CryptocurrencyEntity (
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "name_item")
     val currencyName : String,
 
