@@ -49,7 +49,7 @@ class CryptoCurrencyAdapter() :
         viewHolder.price.text = currencyItem.price.toString()
         val simpleDate = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
         simpleDate.timeZone = TimeZone.getDefault()
-        viewHolder.lastUpdate.text = simpleDate.format(Date(currencyItem.lastUpdate!!.toLong() * 1000))
+        viewHolder.lastUpdate.text = "Останнє оновлення: " + simpleDate.format(Date(currencyItem.lastUpdate!!.toLong() * 1000))
         Picasso.get()
             .load("https://www.cryptocompare.com" + currencyItem.imageURL)
             .into(viewHolder.image)

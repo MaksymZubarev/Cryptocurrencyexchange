@@ -13,7 +13,7 @@ data class CurrencyItem(
     val lastUpdate: Int? = null,
     @SerializedName("HIGHDAY")
     val highday: Double? = null,
-    @SerializedName("LOWHDAY")
+    @SerializedName("LOWDAY")
     val lowday: Double? = null,
     @SerializedName("IMAGEURL")
     val imageURL: String? = null
