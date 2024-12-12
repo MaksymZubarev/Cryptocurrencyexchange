@@ -63,28 +63,32 @@ class MainActivity : AppCompatActivity() {
 
         binding.recyclerCurrency.post {
             val layoutManager = binding.recyclerCurrency.layoutManager as LinearLayoutManager
-            layoutManager.scrollToPositionWithOffset(viewModel.getScrollPosition(), viewModel.getScrollOffset())
+            layoutManager.scrollToPositionWithOffset(
+                viewModel.getScrollPosition(),
+                viewModel.getScrollOffset()
+            )
         }
 
-        cryptoCurrencyAdapter.itemsInteractionListener = object : CryptoCurrencyAdapter.ItemsInteractionListener {
-            override fun onClick(currencyItem: CurrencyItem) {
-                Log.d(TAG, "onClick: $currencyItem")
+        cryptoCurrencyAdapter.itemsInteractionListener =
+            object : CryptoCurrencyAdapter.ItemsInteractionListener {
+                override fun onClick(currencyItem: CurrencyItem) {
+                    Log.d(TAG, "onClick: $currencyItem")
 
-                if (isPortrait){
-                    showInfoAboutItem(currencyItem.currencyName)
-                } else {
-                    currencyItem.currencyName?.let {
-                        CryptoCurrencyFragment.newInstance(
-                            it
-                        )
-                    }?.let { setupFragment(it) }
+                    if (isPortrait) {
+                        showInfoAboutItem(currencyItem.currencyName)
+                    } else {
+                        currencyItem.currencyName?.let {
+                            CryptoCurrencyFragment.newInstance(
+                                it
+                            )
+                        }?.let { setupFragment(it) }
+                    }
                 }
             }
-        }
 
         binding.btnFetch.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
-            viewModel.updateInfo()
+                viewModel.updateInfo()
             }
         }
     }
@@ -95,14 +99,12 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun setupFragment(fragment: CryptoCurrencyFragment){
+    private fun setupFragment(fragment: CryptoCurrencyFragment) {
         supportFragmentManager.popBackStack()
         supportFragmentManager
             .beginTransaction()
             .addToBackStack(null)
             .replace(R.id.currency_item_container, fragment)
             .commit()
-
     }
-
 }
