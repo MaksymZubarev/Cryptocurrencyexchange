@@ -24,8 +24,8 @@
             android:id="@+id/currencyImageFull"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="2dp"
             app:layout_constraintBottom_toTopOf="@+id/currencyLay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -36,9 +36,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/currencyLay"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toTopOf="@+id/cardRate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -88,7 +88,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardRate"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="36dp"
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             app:cardBackgroundColor="@color/white"
@@ -132,7 +132,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardMinRate"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="36dp"
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             app:cardBackgroundColor="@color/white"
@@ -145,7 +145,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/minRateName"
@@ -177,7 +177,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardMaxRate"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="36dp"
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             app:cardBackgroundColor="@color/white"
@@ -190,7 +190,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/maxRateName"
@@ -222,7 +222,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardLastDeal"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="36dp"
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             app:cardBackgroundColor="@color/white"
@@ -235,7 +235,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/lastDealName"
@@ -266,7 +266,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardUpdate"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="36dp"
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             app:cardBackgroundColor="@color/white"
@@ -279,7 +279,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/updateName"

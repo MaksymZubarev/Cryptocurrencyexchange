@@ -12,6 +12,9 @@ import com.example.cryptocurrencyexchange.R
 import com.example.cryptocurrencyexchange.databinding.ActivityMainBinding
 import com.example.cryptocurrencyexchange.domain.items.CurrencyItem
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -48,20 +51,20 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerCurrency.layoutManager = LinearLayoutManager(this)
         binding.recyclerCurrency.adapter = cryptoCurrencyAdapter
 
-//        binding.recyclerCurrency.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                super.onScrolled(recyclerView, dx, dy)
-//                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-//                val position = layoutManager.findFirstVisibleItemPosition()
-//                val offset = layoutManager.findViewByPosition(position)?.top ?: 0
-//                viewModel.saveScrollPosition(position, offset)
-//            }
-//        })
-//
-//        binding.recyclerCurrency.post {
-//            val layoutManager = binding.recyclerCurrency.layoutManager as LinearLayoutManager
-//            layoutManager.scrollToPositionWithOffset(viewModel.getScrollPosition(), viewModel.getScrollOffset())
-//        }
+        binding.recyclerCurrency.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val position = layoutManager.findFirstVisibleItemPosition()
+                val offset = layoutManager.findViewByPosition(position)?.top ?: 0
+                viewModel.saveScrollPosition(position, offset)
+            }
+        })
+
+        binding.recyclerCurrency.post {
+            val layoutManager = binding.recyclerCurrency.layoutManager as LinearLayoutManager
+            layoutManager.scrollToPositionWithOffset(viewModel.getScrollPosition(), viewModel.getScrollOffset())
+        }
 
         cryptoCurrencyAdapter.itemsInteractionListener = object : CryptoCurrencyAdapter.ItemsInteractionListener {
             override fun onClick(currencyItem: CurrencyItem) {
@@ -80,7 +83,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnFetch.setOnClickListener {
+            CoroutineScope(Dispatchers.Main).launch {
             viewModel.updateInfo()
+            }
         }
     }
 
